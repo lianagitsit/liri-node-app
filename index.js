@@ -9,7 +9,7 @@ var twitter = new Twitter(keys.twitter);
 
 
 var command = process.argv[2];
-var title = process.argv.slice(3);
+var title = process.argv[3];
 
 if (command === "my-tweets"){
     twitter.get('statuses/user_timeline', {count: 20}, function(error, tweets, response) {
@@ -23,6 +23,11 @@ if (command === "my-tweets"){
       });
 } else if (command === "spotify-this-song"){
     // Artist, song name, preview link, album
+    // console.log(title);
+    if (!title){
+        console.log("No title");
+        title = "the%20sign%20artist:ace%20of%20base";
+    }
     spotify.search({ type: 'track', query: title }, function(err, data) {
         if (err) {
           return console.log('Error occurred: ' + err);
@@ -36,4 +41,6 @@ if (command === "my-tweets"){
         console.log("========================================");
         console.log("========================================");
     });
+} else if (command === "movie-this"){
+    
 }
